@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as MedicalCodingRouteImport } from './routes/medical-coding'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ServicesRouteImport } from './routes/services'
 
@@ -30,6 +31,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MedicalCodingRoute = MedicalCodingRouteImport.update({
+  id: '/medical-coding',
+  path: '/medical-coding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OpportunitiesRoute = OpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/medical-coding': typeof MedicalCodingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/services': typeof ServicesRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/medical-coding': typeof MedicalCodingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/services': typeof ServicesRoute
 }
@@ -60,21 +68,42 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/medical-coding': typeof MedicalCodingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/opportunities' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/medical-coding'
+    | '/opportunities'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/opportunities' | '/services'
-  id: '__root__' | '/' | '/about' | '/contact' | '/opportunities' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/medical-coding'
+    | '/opportunities'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/medical-coding'
+    | '/opportunities'
+    | '/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  MedicalCodingRoute: typeof MedicalCodingRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   ServicesRoute: typeof ServicesRoute
 }
@@ -102,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/medical-coding': {
+      id: '/medical-coding'
+      path: '/medical-coding'
+      fullPath: '/medical-coding'
+      preLoaderRoute: typeof MedicalCodingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/opportunities': {
       id: '/opportunities'
       path: '/opportunities'
@@ -123,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  MedicalCodingRoute: MedicalCodingRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   ServicesRoute: ServicesRoute,
 }
